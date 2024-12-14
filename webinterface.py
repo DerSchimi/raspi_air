@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 LOG_DIR = 'logfiles'
 
+# Create logfiles directory if it does not exist
+if not os.path.exists(LOG_DIR):
+    os.makedirs(LOG_DIR)
+
 @app.route('/')
 def index():
     log_files = os.listdir(LOG_DIR)
