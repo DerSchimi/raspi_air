@@ -28,5 +28,9 @@ def chart(filename):
             values2.append(row[2])
     return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2)
 
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('static', filename)
+
 if __name__ == '__main__':
     app.run(debug=True)

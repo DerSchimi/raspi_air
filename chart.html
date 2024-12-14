@@ -32,9 +32,42 @@
                     y: {
                         beginAtZero: true
                     }
+                },
+                plugins: {
+                    tooltip: {
+                        enabled: true
+                    },
+                    zoom: {
+                        zoom: {
+                            enabled: true,
+                            mode: 'x'
+                        }
+                    }
                 }
             }
         });
+
+        // Add touch event listeners
+        var touchStartX = 0;
+        var touchEndX = 0;
+
+        ctx.canvas.addEventListener('touchstart', function(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        });
+
+        ctx.canvas.addEventListener('touchend', function(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            handleGesture();
+        });
+
+        function handleGesture() {
+            if (touchEndX < touchStartX) {
+                myChart.zoomOut();
+            }
+            if (touchEndX > touchStartX) {
+                myChart.zoomIn();
+            }
+        }
     </script>
 </body>
 </html>
