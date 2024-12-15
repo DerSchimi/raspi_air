@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 import os
 import csv
+import datetime
 
 app = Flask(__name__)
 
@@ -23,7 +24,7 @@ def chart(filename):
     with open(os.path.join(LOG_DIR, filename), 'r') as f:
         reader = csv.reader(f)
         for row in reader:
-            timestamps.append(row[0])
+            timestamps.append(datetime.datetime.fromtimestamp(int(row[0])).strftime('%Y-%m-%d %H:%M:%S'))
             values1.append(row[1])
             values2.append(row[2])
     return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2, x_label='Time', y_label='Values')
