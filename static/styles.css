@@ -9,3 +9,8 @@
     width: 100%;
     height: 500px;
 }
+
+ul.log-file-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
