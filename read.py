@@ -11,7 +11,7 @@ import time
 import os
 
 def create_logfile():
-    current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+    current_time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
