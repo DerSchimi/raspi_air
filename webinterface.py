@@ -29,7 +29,9 @@ def chart(filename):
             timestamps.append(datetime.datetime.fromtimestamp(int(row[0])).strftime('%Y-%m-%d %H:%M:%S'))
             values1.append(row[1])
             values2.append(row[2])
-    return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2, x_label='Time', y_label='Values')
+    pm25_limit = 5
+    pm10_limit = 15
+    return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2, pm25_limit=pm25_limit, pm10_limit=pm10_limit, x_label='Time', y_label='Values')
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
