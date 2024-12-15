@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Raspi Air
+Exec=python3 /path/to/read.py
+Icon=/path/to/icon.png
+Type=Application
