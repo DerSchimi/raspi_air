@@ -15,7 +15,7 @@ def create_logfile():
     filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
-reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=20, samples=4)
+reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=12)
 
 logfile = create_logfile()
 start_time = time.time()
@@ -34,3 +34,4 @@ with reader:
             break
 
 logfile.close()
+print("Logfile saved on", logfile.name)

@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
-Name=Test
-Comment=Test the terminal running a command inside it
-Exec=bash -c 'echo hello;$SHELL'
+Name=Read py
+Comment=Run read.py
+Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 read.py;$SHELL'
 Icon=utilities-terminal
 Terminal=true
 Type=Application
