@@ -18,7 +18,7 @@ def create_logfile(room_name=None):
         filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
-reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=12)
+reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=10)
 
 logfile = create_logfile(room_name="arbeitszimmer1")
 start_time = time.time()
