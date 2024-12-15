@@ -10,14 +10,17 @@ import datetime
 import time
 import os
 
-def create_logfile():
+def create_logfile(room_name=None):
     current_time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    filename = os.path.join("logfiles", f"log_{current_time}.csv")
+    if room_name:
+        filename = os.path.join("logfiles", f"log_{current_time}_{room_name}.csv")
+    else:
+        filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
 reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=12)
 
-logfile = create_logfile()
+logfile = create_logfile(room_name="arbeitszimmer1")
 start_time = time.time()
 
 print("\nSDS011 4 samples on CSV format with header")

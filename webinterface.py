@@ -15,7 +15,7 @@ if not os.path.exists(LOG_DIR):
 def index():
     log_files = os.listdir(LOG_DIR)
     # Sort log_files list by date before rendering the template
-    log_files = sorted(log_files, key=lambda x: datetime.datetime.strptime(x, 'log_%Y_%m_%d_%H_%M_%S.csv'))
+    log_files = sorted(log_files, key=lambda x: datetime.datetime.strptime(x.split('_')[1] + '_' + x.split('_')[2] + '_' + x.split('_')[3] + '_' + x.split('_')[4] + '_' + x.split('_')[5] + '_' + x.split('_')[6].split('.')[0], '%Y_%m_%d_%H_%M_%S'))
     return render_template('index.html', log_files=log_files)
 
 @app.route('/chart/<filename>')
