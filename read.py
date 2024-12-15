@@ -32,7 +32,7 @@ with reader:
             print_header = False
         logfile.write(f"{obs:csv}\n")
         print(f"{obs:csv}\n")
-        if time.time() - start_time > 300:
+        if time.time() - start_time > 600:
             break
 
 logfile.close()
