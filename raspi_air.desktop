@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Raspi Air
-Exec=python3 /path/to/read.py
+Exec=gnome-terminal -- sh "/raspi_air/runscript.sh"
+
 Icon=/path/to/icon.png
 Type=Application
