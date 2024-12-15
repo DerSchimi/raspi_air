@@ -20,7 +20,7 @@ def create_logfile(room_name=None):
 
 reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=10)
 
-logfile = create_logfile(room_name="arbeitszimmer1")
+logfile = create_logfile()
 start_time = time.time()
 
 print("\nSDS011 4 samples on CSV format with header")
