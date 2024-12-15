@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Read py
+Name=Webserver
 Comment=Run Webserver
 Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 webserver.py;$SHELL'
 Icon=utilities-terminal
