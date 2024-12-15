@@ -18,7 +18,7 @@ def create_logfile(room_name=None):
         filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
-reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=10)
+reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=100)
 
 logfile = create_logfile()
 start_time = time.time()
@@ -32,7 +32,7 @@ with reader:
             print_header = False
         logfile.write(f"{obs:csv}\n")
         print(f"{obs:csv}\n")
-        if time.time() - start_time > 600:
+        if time.time() - start_time > 6000:
             break
 
 logfile.close()
