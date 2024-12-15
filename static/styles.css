@@ -7,10 +7,12 @@
 
 #myChart {
     width: 100%;
-    height: 500px;
+    height: 200px;
+    overflow-y: auto;
+    max-height: 200px;
 }
 
 ul.log-file-list {
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
 }
