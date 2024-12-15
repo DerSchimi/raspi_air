@@ -8,10 +8,11 @@ and print the observations on different formats.
 from pms.core import SensorReader
 import datetime
 import time
+import os
 
 def create_logfile():
     current_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-    filename = f"log_{current_time}.csv"
+    filename = os.path.join("logfiles", f"log_{current_time}.csv")
     return open(filename, 'w')
 
 reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=20, samples=4)
