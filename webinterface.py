@@ -26,7 +26,7 @@ def chart(filename):
             timestamps.append(row[0])
             values1.append(row[1])
             values2.append(row[2])
-    return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2)
+    return render_template('chart.html', timestamps=timestamps, values1=values1, values2=values2, x_label='Time', y_label='Values')
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):
