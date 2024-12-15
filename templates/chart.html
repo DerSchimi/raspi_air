@@ -7,42 +7,34 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <canvas id="myChart" width="400" height="200"></canvas>
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: {{ timestamps|tojson }},
-                datasets: [{
-                    label: 'PM 2.5',
-                    data: {{ values1|tojson }},
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
-                }, {
-                    label: 'PM 10',
-                    data: {{ values2|tojson }},
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Time'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
+<canvas id="myChart" width="400" height="200"></canvas>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ timestamps|tojson }},
+    datasets: [{
+        label: 'pm25',
+        data: {{ values1|tojson }},
 
-                    }
-                },
-
-                }
+    color: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+    }, {
+        label: 'pm10',
+            data: {{ values2|tojson }},
+        color: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+    }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
-        });
-    </script>
+        }
+    }
+    });
+</script>
 </body>
 </html>
