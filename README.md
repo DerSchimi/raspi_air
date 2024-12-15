@@ -39,7 +39,7 @@ This project is designed to read data from a PMSx003 sensor connected to a Raspb
 
 3. Click on a log file to generate a chart from the data in the log file.
 
-4. The log files will be created in the `logfiles` directory.
+4. The log files will be created in the `logfiles` directory with a name pattern like `log_2023_04_15_14_30_00.csv`.
 
 ## Contributing
 
