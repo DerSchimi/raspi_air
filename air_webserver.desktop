@@ -2,7 +2,7 @@
 Version=1.0
 Name=Webserver
 Comment=Run Webserver
-Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 webserver.py;$SHELL'
+Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 webinterface.py;$SHELL'
 Icon=utilities-terminal
 Terminal=true
 Type=Application
