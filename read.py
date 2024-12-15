@@ -25,8 +25,10 @@ with reader:
     for obs in reader():
         if print_header:
             logfile.write(f"{obs:header}\n")
+            print(f"{obs:header}\n")
             print_header = False
         logfile.write(f"{obs:csv}\n")
+        print(f"{obs:csv}\n")
         if time.time() - start_time > 300:
             break
 
