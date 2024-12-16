@@ -4,6 +4,10 @@
 
 This project is designed to read data from a PMSx003 sensor connected to a Raspberry Pi and log the data into CSV files. The project also includes a web interface to list all log files from a directory and generate charts from the data in the log files.
 
+## Experimental App
+
+This is an experimental app to read data via `pypms` from an `sds1011` sensor and send it to an Adafruit dashboard. The app leverages advanced sensor reading techniques and cloud integration to provide real-time data visualization and monitoring. By utilizing the `pypms` library, the app ensures accurate and efficient data collection from the `sds1011` sensor. The integration with the Adafruit dashboard allows for seamless data transmission and visualization, enabling users to monitor air quality metrics in real-time.
+
 ## Dependencies
 
 - Flask
