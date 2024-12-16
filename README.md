@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is designed to read data from a PMSx003 sensor connected to a Raspberry Pi and log the data into CSV files. The project also includes a web interface to list all log files from a directory and generate charts from the data in the log files.
+This project is designed to read data from a sds1011 sensor connected to a Raspberry Pi and log the data into CSV files. The project also includes a web interface to list all log files from a directory and generate charts from the data in the log files.
 
 ## Experimental App
 
