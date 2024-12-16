@@ -1,5 +1,5 @@
 """
-Read PMSx003 sensor on /dev/ttyUSB0.
+read PMSx003 sensor on /dev/ttyUSB0.
 
 Read 4 samples, one sample every 20 seconds,
 and print the observations on different formats.
@@ -15,7 +15,7 @@ from Adafruit_IO import Client, Feed
 
 def sendDataToAdafruitIO(pm25, pm10):
   # Your Adafruit IO credentials
-  ADAFRUIT_IO_USERNAME = 'DrDanger123'
+  ADAFRUIT_IO_USERNAME = ''
   ADAFRUIT_IO_KEY = ''
 
   # Initialize the Adafruit IO Client
@@ -59,10 +59,10 @@ def read_sensor():
         for obs in reader():
           pm25 = obs.pm25
           pm10 = obs.pm10
-          sendDataToAdafruitIO(pm25,pm19)
-            if print_header:
-                print(f"{obs:header}\n")
-                print_header = False
+          sendDataToAdafruitIO(pm25,pm10)
+          if print_header:
+            print(f"{obs:header}\n")
+            print_header = False
             print(f"{obs:csv}\n")
             break
 
