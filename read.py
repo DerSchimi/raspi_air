@@ -20,25 +20,25 @@ def create_logfile(room_name=None):
     return open(filename, 'w')
 
 def read_sensor():
-    reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=100)
-    logfile = create_logfile()
+    reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
+    #logfile = create_logfile()
     start_time = time.time()
 
-    print("\nSDS011 4 samples on CSV format with header")
+    print("\nSDS011 1 sample on CSV format with header")
     with reader:
         print_header = True
         for obs in reader():
             if print_header:
                 print(f"{obs:header}\n")
                 print_header = False
-            logfile.write(f"{obs:csv}\n")
+            #logfile.write(f"{obs:csv}\n")
             print(f"{obs:csv}\n")
-            if time.time() - start_time > 20:
                 break
+    print("done")
+    #logfile.close()
+    #print("Logfile saved on", logfile.name)
 
-    logfile.close()
-    print("Logfile saved on", logfile.name)
-
+read_sensor()
 schedule.every(5).minutes.do(read_sensor)
 
 while True:
