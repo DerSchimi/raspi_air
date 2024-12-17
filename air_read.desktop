@@ -1,8 +1,8 @@
 [Desktop Entry]
 Version=1.0
 Name=Read py
-Comment=Run read.py
-Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 read.py;$SHELL'
+Comment=Run ReadLocal.py
+Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 readLocal.py;$SHELL'
 Icon=utilities-terminal
 Terminal=true
 Type=Application
