@@ -56,19 +56,15 @@ def read_sensor():
     print("\nSDS011 Live Logger ")
     with reader:
         print_header = True
-        for obs in reader():
-          pm25 = obs.pm25
-          pm10 = obs.pm10
-          sendDataToAdafruitIO(pm25,pm10)
-          if print_header:
-            print(f"{obs:header}\n")
-            print_header = False
-            print(f"{obs:csv}\n")
-            break
+        while time.time() - start_time < 60:
+         for obs in reader():
+           pm25 = obs.pm25
+           pm10 = obs.pm10
+           sendDataToAdafruitIO(pm25,pm10)
+           if print_header:
+             print(f"{obs:header}\n")
+             print_header = False
+             print(f"{obs:csv}\n")
+             break
 
 read_sensor()
-schedule.every(1).seconds.do(read_sensor)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
