@@ -50,7 +50,7 @@ def create_logfile(room_name=None):
     return open(filename, 'w')
 
 def read_sensor():
-    reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=1, samples=60)
+    reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=1)
     start_time = time.time()
 
     print("\nSDS011 Live Logger ")
