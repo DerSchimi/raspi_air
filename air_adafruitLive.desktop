@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=Read py
+Comment=Run logAndSendToAdafruitDashboard.py
+Exec=bash -c 'cd /home/daniel/raspi_air && /usr/bin/python3 logAndSendToLiveAdafruitDashboard.py;$SHELL'
+Icon=utilities-terminal
+Terminal=true
+Type=Application
+Categories=Application;
