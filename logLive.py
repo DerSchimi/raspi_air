@@ -59,16 +59,16 @@ def read_sensor():
     print("\nSDS011 Live Logger ")
     with reader:
         print_header = True
-        while time.time() - start_time < 60:
+        while time.time() - start_time < 120:
          for obs in reader():
            pm25 = obs.pm25
            pm10 = obs.pm10
            sendDataToAdafruitIO(pm25,pm10)
+           time.sleep(5)
            if print_header:
              print(f"{obs:header}\n")
              print_header = False
              print(f"{obs:csv}\n")
-             time.sleep(5)
              break
 
 read_sensor()
