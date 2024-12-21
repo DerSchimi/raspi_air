@@ -11,12 +11,15 @@ import time
 import os
 import schedule
 from Adafruit_IO import Client, Feed
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 def sendDataToAdafruitIO(pm25, pm10):
-  # Your Adafruit IO credentials
-  ADAFRUIT_IO_USERNAME = ''
-  ADAFRUIT_IO_KEY = ''
+  # Get Adafruit IO credentials from environment variables
+  ADAFRUIT_IO_USERNAME = os.getenv('ADAFRUIT_IO_USERNAME')
+  ADAFRUIT_IO_KEY = os.getenv('ADAFRUIT_IO_KEY')
 
   # Initialize the Adafruit IO Client
   aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
@@ -65,6 +68,7 @@ def read_sensor():
              print(f"{obs:header}\n")
              print_header = False
              print(f"{obs:csv}\n")
+             time.sleep(5)
              break
 
 read_sensor()

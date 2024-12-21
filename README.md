@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is designed to read data from a SDS011 sensor connected to a Raspberry Pi and log the data into CSV files. The project also includes a web interface to list all log files from a directory and generate charts from the data in the log files.
+This project is designed to read data from a SDS011 sensor connected to a Raspberry Pi and log the data to an adafruit dashboard.
 
 ## Experimental App
 
@@ -10,9 +10,8 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
 
 ## Dependencies
 
-- Flask
-- Chart.js
 - pms
+- python-dotenv
 
 ## Installation
 
@@ -24,35 +23,24 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
 
 2. Install the required dependencies:
     ```sh
-    pip install flask pms
+    pip install flask pms python-dotenv
     ```
-
-3. Create the `logfiles` directory:
-    ```sh
-    mkdir logfiles
+3Create a `.env` file in the project directory and add your Adafruit IO credentials:
+    ```plaintext
+    ADAFRUIT_IO_USERNAME=your_username
+    ADAFRUIT_IO_KEY=your_key
     ```
 
 ## Usage
 
-1. Run the web interface:
+1. To read data from the SDS011 sensor and send it to the Adafruit dashboard every 5 seconds, run:
     ```sh
-    python webinterface.py
+    python logLive.py
     ```
 
-2. Open your web browser and go to `http://127.0.0.1:5000/` to view the list of log files.
-
-3. Click on a log file to generate a chart from the data in the log file.
-
-4. The log files will be created in the `logfiles` directory with a name pattern like `log_2023_04_15_14_30_00.csv`.
-
-5. To read data from the SDS011 sensor and log it to a CSV file, run:
+2. To read data from the SDS011 sensor and log it to a CSV file every 5 minutes, run:
     ```sh
-    python readLocal.py
-    ```
-
-6. To read data from the SDS011 sensor and send it to the Adafruit dashboard, run:
-    ```sh
-    python logAndSendToAdafruitDashboard.py
+    python logNormal.py
     ```
 
 ## Contributing
