@@ -53,6 +53,28 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
     python logTemp.py
     ```
 
+4. Create a `config.ini` file in the project directory with the following content:
+    ```ini
+    [AUTH]
+    authtoken=your_auth_token
+    accesspoint=your_access_point
+    ```
+
+## Device Map Configuration
+
+Create a `devices.json` file in the root directory of your project with the following content:
+
+```json
+{
+    "3014F711A0000314C98CC0B3": "tempwohnzimmer",
+    "3014F711A0000A9AE991DED0": "tempgaestewc",
+    "3014F711A0020313C98CC097": "tempkinderzimmer",
+    "3014F711B0000A9A499947EC": "tempbadezimmer"
+}
+
+```
+
+
 ## Contributing
 
 Contributions are welcome! Please follow these guidelines when contributing to the project:
