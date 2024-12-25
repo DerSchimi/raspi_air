@@ -102,11 +102,15 @@ def read_sensor():
                 break
 
 # Schedule the logging every 1 minute
-log_temperatures()
-read_sensor()
-schedule.every(1).minutes.do(log_temperatures)
-schedule.every(5).minutes.do(read_sensor)
+
+def loglog():
+    log_temperatures()
+    read_sensor()
+
+schedule.every(1).minutes.do(loglog)
+
 
 while True:
     schedule.run_pending()
+    print("Waiting for next schedule...")
     time.sleep(1)
