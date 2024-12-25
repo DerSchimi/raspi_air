@@ -103,6 +103,7 @@ def read_sensor():
 
 # Schedule the logging every 1 minute
 log_temperatures()
+read_sensor()
 schedule.every(1).minutes.do(log_temperatures)
 schedule.every(5).minutes.do(read_sensor)
 
