@@ -2,7 +2,7 @@
 
 ## Project Description
 
-This project is designed to read data from a SDS011 sensor connected to a Raspberry Pi and log the data to an adafruit dashboard.
+This project is designed to read data from a SDS011 sensor and a Homematic device connected to a Raspberry Pi and log the data to an adafruit dashboard.
 
 ## Experimental App
 
@@ -12,6 +12,7 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
 
 - pms
 - python-dotenv
+- pyhomematic
 
 ## Installation
 
@@ -23,13 +24,17 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
 
 2. Install the required dependencies:
     ```sh
-    pip install flask pms python-dotenv
+    pip install flask pms python-dotenv pyhomematic
     ```
-3Create a `.env` file in the project directory and add your Adafruit IO credentials:
+3. Create a `.env` file in the project directory and add your Adafruit IO credentials:
     ```plaintext
     ADAFRUIT_IO_USERNAME=your_username
     ADAFRUIT_IO_KEY=your_key
     ```
+
+4. Set up your Homematic device:
+    - Ensure your Homematic device is connected and configured correctly.
+    - Replace the placeholder `device_address` in the `logTemp.py` script with your actual Homematic device address.
 
 ## Usage
 
@@ -41,6 +46,11 @@ This is an experimental app to read data via `pypms` from an `SDS011` sensor and
 2. To read data from the SDS011 sensor and log it to a CSV file every 5 minutes, run:
     ```sh
     python logNormal.py
+    ```
+
+3. To read temperature data from the Homematic device and send it to the Adafruit dashboard every 5 minutes, run:
+    ```sh
+    python logTemp.py
     ```
 
 ## Contributing
