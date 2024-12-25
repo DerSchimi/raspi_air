@@ -104,6 +104,7 @@ def read_sensor():
 # Schedule the logging every 1 minute
 
 def loglog():
+    print("Log log")
     log_temperatures()
     read_sensor()
 
@@ -112,5 +113,4 @@ schedule.every(1).minutes.do(loglog)
 
 while True:
     schedule.run_pending()
-    print("Waiting for next schedule...")
     time.sleep(1)
