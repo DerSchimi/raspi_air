@@ -48,6 +48,7 @@ def send_temperature_to_adafruit(feed_id, temperature):
         print(f"Failed to send data: {e}")
 
 def log_temperatures():
+    home.get_current_state()
     print("Logging temperature data of devices:")
     for device in home.devices:
         if device.id in device_map and hasattr(device, 'actualTemperature'):
@@ -108,7 +109,7 @@ def loglog():
     log_temperatures()
     read_sensor()
 
-schedule.every(1).minutes.do(loglog)
+schedule.every(5).minutes.do(loglog)
 
 
 while True:
