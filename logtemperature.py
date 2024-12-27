@@ -8,7 +8,7 @@ from Adafruit_IO import Client
 from dotenv import load_dotenv
 
 # Configure logging to a file
-logging.basicConfig(filename='logtemperature.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename='logtemperature.log', level=logging.INFO, format='%(asctime)s - %(message)s', stream=sys.stdout)
 
 # Load environment variables from .env file
 load_dotenv()
