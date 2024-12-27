@@ -7,6 +7,9 @@ from homematicip.home import Home
 from Adafruit_IO import Client
 from dotenv import load_dotenv
 
+# Configure logging to a file
+logging.basicConfig(filename='logtemperature.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -45,17 +48,17 @@ aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 def send_temperature_to_adafruit(feed_id, temperature):
     try:
         aio.send(feed_id, temperature)
-        print(f"Data {temperature} sent to feed '{feed_id}' successfully!")
+        logging.info(f"Data {temperature} sent to feed '{feed_id}' successfully!")
     except Exception as e:
-        print(f"Failed to send data: {e}")
+        logging.info(f"Failed to send data: {e}")
 
 def log_temperatures():
-    print("Logging temperature data of devices:")
+    logging.info("Logging temperature data of devices:")
     for device in home.devices:
         if device.id in device_map and hasattr(device, 'actualTemperature'):
             adafruit_feed_id = device_map[device.id]
             temperature = device.actualTemperature
-            print(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
+            logging.info(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
             send_temperature_to_adafruit(adafruit_feed_id, temperature)
 
 # Schedule the logging every 1 minute

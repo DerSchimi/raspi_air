@@ -12,6 +12,10 @@ import os
 import schedule
 from Adafruit_IO import Client, Feed
 from dotenv import load_dotenv
+import logging
+
+# Configure logging to a file
+logging.basicConfig(filename='logLive.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 # Load environment variables from .env file
 load_dotenv()
@@ -30,18 +34,18 @@ def sendDataToAdafruitIO(pm25, pm10):
 
   try:
       aio.send(feed_name, data_value)
-      print(f"Data {data_value} sent to feed '{feed_name}' successfully!")
+      logging.info(f"Data {data_value} sent to feed '{feed_name}' successfully!")
   except Exception as e:
-      print(f"Failed to send data: {e}")
+      logging.info(f"Failed to send data: {e}")
 
   feed_name = 'pm25'  # Replace with your feed name
   data_value = pm25          # Replace with the value you want to send
 
   try:
       aio.send(feed_name, data_value)
-      print(f"Data {data_value} sent to feed '{feed_name}' successfully!")
+      logging.info(f"Data {data_value} sent to feed '{feed_name}' successfully!")
   except Exception as e:
-      print(f"Failed to send data: {e}")
+      logging.info(f"Failed to send data: {e}")
 
 
 def create_logfile(room_name=None):
@@ -56,7 +60,7 @@ def read_sensor():
     reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=60, samples=1)
     start_time = time.time()
 
-    print("\nSDS011 Live Logger ")
+    logging.info("\nSDS011 Live Logger ")
     with reader:
         print_header = True
         while time.time() - start_time < 120:
@@ -66,9 +70,9 @@ def read_sensor():
            sendDataToAdafruitIO(pm25,pm10)
            time.sleep(5)
            if print_header:
-             print(f"{obs:header}\n")
+             logging.info(f"{obs:header}\n")
              print_header = False
-             print(f"{obs:csv}\n")
+             logging.info(f"{obs:csv}\n")
              break
 
 read_sensor()
