@@ -10,8 +10,14 @@ import homematicip.auth
 from homematicip.home import Home
 
 # Configure logging to a file
-logging.basicConfig(filename='createcredentials.log', level=logging.INFO, format='%(asctime)s - %(message)s')
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logcredentials.log"),
+        logging.StreamHandler()
+    ]
+)
 def main():
     while True:
         access_point = (

@@ -15,7 +15,15 @@ from dotenv import load_dotenv
 import logging
 
 # Configure logging to a file
-logging.basicConfig(filename='logLive.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+# Configure logging to a file
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logLive.log"),
+        logging.StreamHandler()
+    ]
+)
 
 # Load environment variables from .env file
 load_dotenv()
