@@ -9,6 +9,9 @@ from Adafruit_IO import Client, Feed
 from dotenv import load_dotenv
 from pms.core import SensorReader
 
+# Configure logging to a file
+logging.basicConfig(filename='logNormal.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+
 # Load environment variables from .env file
 load_dotenv()
 
@@ -43,18 +46,18 @@ aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 def send_temperature_to_adafruit(feed_id, temperature):
     try:
         aio.send(feed_id, temperature)
-        print(f"Data {temperature} sent to feed '{feed_id}' successfully!")
+        logging.info(f"Data {temperature} sent to feed '{feed_id}' successfully!")
     except Exception as e:
-        print(f"Failed to send data: {e}")
+        logging.info(f"Failed to send data: {e}")
 
 def log_temperatures():
     home.get_current_state()
-    print("Logging temperature data of devices:")
+    logging.info("Logging temperature data of devices:")
     for device in home.devices:
         if device.id in device_map and hasattr(device, 'actualTemperature'):
             adafruit_feed_id = device_map[device.id]
             temperature = device.actualTemperature
-            print(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
+            logging.info(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
             send_temperature_to_adafruit(adafruit_feed_id, temperature)
 
 def sendDataToAdafruitIO(pm25, pm10):
@@ -64,18 +67,18 @@ def sendDataToAdafruitIO(pm25, pm10):
 
     try:
         aio.send(feed_name, data_value)
-        print(f"Data {data_value} sent to feed '{feed_name}' successfully!")
+        logging.info(f"Data {data_value} sent to feed '{feed_name}' successfully!")
     except Exception as e:
-        print(f"Failed to send data: {e}")
+        logging.info(f"Failed to send data: {e}")
 
     feed_name = 'pm25'  # Replace with your feed name
     data_value = pm25          # Replace with the value you want to send
 
     try:
         aio.send(feed_name, data_value)
-        print(f"Data {data_value} sent to feed '{feed_name}' successfully!")
+        logging.info(f"Data {data_value} sent to feed '{feed_name}' successfully!")
     except Exception as e:
-        print(f"Failed to send data: {e}")
+        logging.info(f"Failed to send data: {e}")
 
 def create_logfile(room_name=None):
     current_time = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
@@ -89,7 +92,7 @@ def read_sensor():
     reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
     start_time = time.time()
 
-    print("\nSDS011 1 sample on CSV format with header")
+    logging.info("\nSDS011 1 sample on CSV format with header")
     with reader:
         print_header = True
         for obs in reader():
@@ -97,15 +100,15 @@ def read_sensor():
             pm10 = obs.pm10
             sendDataToAdafruitIO(pm25, pm10)
             if print_header:
-                print(f"{obs:header}\n")
+                logging.info(f"{obs:header}\n")
                 print_header = False
-                print(f"{obs:csv}\n")
+                logging.info(f"{obs:csv}\n")
                 break
 
 # Schedule the logging every 1 minute
 
 def loglog():
-    print("Log log")
+    logging.info("Log log")
     log_temperatures()
     read_sensor()
 

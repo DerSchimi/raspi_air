@@ -3,11 +3,14 @@ import configparser
 import json
 import time
 from builtins import input
+import logging
 
 import homematicip
 import homematicip.auth
 from homematicip.home import Home
 
+# Configure logging to a file
+logging.basicConfig(filename='createcredentials.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def main():
     while True:
@@ -15,7 +18,7 @@ def main():
             input("Please enter the accesspoint id (SGTIN): ").replace("-", "").upper()
         )
         if len(access_point) != 24:
-            print("Invalid access_point id")
+            logging.info("Invalid access_point id")
             continue
         break
 
@@ -43,28 +46,28 @@ def main():
 
         errorCode = json.loads(response.text)["errorCode"]
         if errorCode == "INVALID_PIN":
-            print("PIN IS INVALID!")
+            logging.info("PIN IS INVALID!")
         elif errorCode == "ASSIGNMENT_LOCKED":
-            print("LOCKED ! Press button on HCU to unlock.")
+            logging.info("LOCKED ! Press button on HCU to unlock.")
             time.sleep(5)
         else:
-            print("Error: {}\nExiting".format(errorCode))
+            logging.info("Error: {}\nExiting".format(errorCode))
             return
 
-    print("Connection Request successful!")
-    print("Please press the blue button on the access point")
+    logging.info("Connection Request successful!")
+    logging.info("Please press the blue button on the access point")
     while not auth.isRequestAcknowledged():
-        print("Please press the blue button on the access point")
+        logging.info("Please press the blue button on the access point")
         time.sleep(2)
 
     auth_token = auth.requestAuthToken()
     clientId = auth.confirmAuthToken(auth_token)
 
-    print(
+    logging.info(
         "-----------------------------------------------------------------------------"
     )
-    print("Token successfully registered!")
-    print(
+    logging.info("Token successfully registered!")
+    logging.info(
         "AUTH_TOKEN:\t{}\nACCESS_POINT:\t{}\nClient ID:\t{}\nsaving configuration to ./config.ini".format(
             auth_token, access_point, clientId
         )
