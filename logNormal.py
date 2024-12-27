@@ -10,8 +10,14 @@ from dotenv import load_dotenv
 from pms.core import SensorReader
 
 # Configure logging to a file
-logging.basicConfig(filename='logNormal.log', level=logging.INFO, format='%(asctime)s - %(message)s')
-
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logNormal.log"),
+        logging.StreamHandler()
+    ]
+)
 # Load environment variables from .env file
 load_dotenv()
 
