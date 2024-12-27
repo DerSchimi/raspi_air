@@ -13,7 +13,7 @@ import schedule
 from Adafruit_IO import Client, Feed
 from dotenv import load_dotenv
 import logging
-import sys
+
 # Configure logging to a file
 logging.basicConfig(filename='logLive.log', level=logging.INFO, format='%(asctime)s - %(message)s')
 
