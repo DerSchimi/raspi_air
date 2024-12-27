@@ -8,7 +8,7 @@ from homematicip.home import Home
 from Adafruit_IO import Client, Feed
 from dotenv import load_dotenv
 from pms.core import SensorReader
-
+import sys
 # Configure logging to a file
 logging.basicConfig(filename='logNormal.log', level=logging.INFO, format='%(asctime)s - %(message)s', stream=sys.stdout)
 
