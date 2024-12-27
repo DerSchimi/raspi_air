@@ -4,13 +4,14 @@ import json
 import time
 from builtins import input
 import logging
+import sys
 
 import homematicip
 import homematicip.auth
 from homematicip.home import Home
 
 # Configure logging to a file
-logging.basicConfig(filename='createcredentials.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+logging.basicConfig(filename='createcredentials.log', level=logging.INFO, format='%(asctime)s - %(message)s', stream=sys.stdout)
 
 def main():
     while True:
