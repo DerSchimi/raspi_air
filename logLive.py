@@ -75,7 +75,10 @@ def read_sensor():
          for obs in reader():
            pm25 = obs.pm25
            pm10 = obs.pm10
-           sendDataToAdafruitIO(pm25,pm10)
+           try:
+               sendDataToAdafruitIO(pm25,pm10)
+           except Exception as e:
+               logging.info(f"Failed to send data to Adafruit IO: {e}")
            time.sleep(5)
            if print_header:
              logging.info(f"{obs:header}\n")
@@ -83,4 +86,7 @@ def read_sensor():
              logging.info(f"{obs:csv}\n")
              break
 
-read_sensor()
+try:
+    read_sensor()
+except Exception as e:
+    logging.info(f"Failed to read sensor: {e}")

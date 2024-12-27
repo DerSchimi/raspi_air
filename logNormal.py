@@ -36,7 +36,10 @@ home.set_auth_token(auth_token)
 home.init(access_point)
 
 # Daten synchronisieren
-home.get_current_state()
+try:
+    home.get_current_state()
+except Exception as e:
+    logging.info(f"Failed to get current state: {e}")
 
 # Load device map from devices.json
 with open('devices.json', 'r') as f:
@@ -57,14 +60,20 @@ def send_temperature_to_adafruit(feed_id, temperature):
         logging.info(f"Failed to send data: {e}")
 
 def log_temperatures():
-    home.get_current_state()
+    try:
+        home.get_current_state()
+    except Exception as e:
+        logging.info(f"Failed to get current state: {e}")
     logging.info("Logging temperature data of devices:")
     for device in home.devices:
         if device.id in device_map and hasattr(device, 'actualTemperature'):
             adafruit_feed_id = device_map[device.id]
             temperature = device.actualTemperature
             logging.info(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
-            send_temperature_to_adafruit(adafruit_feed_id, temperature)
+            try:
+                send_temperature_to_adafruit(adafruit_feed_id, temperature)
+            except Exception as e:
+                logging.info(f"Failed to send temperature to Adafruit IO: {e}")
 
 def sendDataToAdafruitIO(pm25, pm10):
     # Send data to a feed
@@ -101,15 +110,18 @@ def read_sensor():
     logging.info("\nSDS011 1 sample on CSV format with header")
     with reader:
         print_header = True
-        for obs in reader():
-            pm25 = obs.pm25
-            pm10 = obs.pm10
-            sendDataToAdafruitIO(pm25, pm10)
-            if print_header:
-                logging.info(f"{obs:header}\n")
-                print_header = False
-                logging.info(f"{obs:csv}\n")
-                break
+        try:
+            for obs in reader():
+                pm25 = obs.pm25
+                pm10 = obs.pm10
+                sendDataToAdafruitIO(pm25, pm10)
+                if print_header:
+                    logging.info(f"{obs:header}\n")
+                    print_header = False
+                    logging.info(f"{obs:csv}\n")
+                    break
+        except Exception as e:
+            logging.info(f"Failed to read sensor: {e}")
 
 # Schedule the logging every 1 minute
 
