@@ -35,7 +35,10 @@ home.set_auth_token(auth_token)
 home.init(access_point)
 
 # Daten synchronisieren
-home.get_current_state()
+try:
+    home.get_current_state()
+except Exception as e:
+    logging.info(f"Failed to get current state: {e}")
 
 # Map with device IDs and corresponding Adafruit data feed IDs
 device_map = {
@@ -66,7 +69,10 @@ def log_temperatures():
             adafruit_feed_id = device_map[device.id]
             temperature = device.actualTemperature
             logging.info(f"Gerät: {device.label} / {device.id} - Temperatur: {temperature}°C - Adafruit Feed ID: {adafruit_feed_id}")
-            send_temperature_to_adafruit(adafruit_feed_id, temperature)
+            try:
+                send_temperature_to_adafruit(adafruit_feed_id, temperature)
+            except Exception as e:
+                logging.info(f"Failed to send temperature to Adafruit IO: {e}")
 
 # Schedule the logging every 1 minute
 log_temperatures()
