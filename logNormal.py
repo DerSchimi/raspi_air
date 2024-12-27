@@ -109,6 +109,7 @@ def loglog():
     log_temperatures()
     read_sensor()
 
+loglog()
 schedule.every(5).minutes.do(loglog)
 
 
