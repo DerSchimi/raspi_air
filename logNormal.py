@@ -105,28 +105,31 @@ def create_logfile(room_name=None):
 
 def read_sensor():
     try:
-        reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
-    except Exception as e:
-        logging.info(f"Failed to initialize sensor reader: {e}")
-        return
-
-    start_time = time.time()
-
-    logging.info("\nSDS011 1 sample on CSV format with header")
-    with reader:
-        print_header = True
         try:
-            for obs in reader():
-                pm25 = obs.pm25
-                pm10 = obs.pm10
-                sendDataToAdafruitIO(pm25, pm10)
-                if print_header:
-                    logging.info(f"{obs:header}\n")
-                    print_header = False
-                    logging.info(f"{obs:csv}\n")
-                    break
+            reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
         except Exception as e:
-            logging.info(f"Failed to read sensor: {e}")
+            logging.info(f"Failed to initialize sensor reader: {e}")
+            return
+
+        start_time = time.time()
+
+        logging.info("\nSDS011 1 sample on CSV format with header")
+        with reader:
+            print_header = True
+            try:
+                for obs in reader():
+                    pm25 = obs.pm25
+                    pm10 = obs.pm10
+                    sendDataToAdafruitIO(pm25, pm10)
+                    if print_header:
+                        logging.info(f"{obs:header}\n")
+                        print_header = False
+                        logging.info(f"{obs:csv}\n")
+                        break
+            except Exception as e:
+                logging.info(f"Failed to read sensor: {e}")
+    except Exception as e:
+        logging.info(f"Failed to read sensor: {e}")
 
 # Schedule the logging every 1 minute
 
