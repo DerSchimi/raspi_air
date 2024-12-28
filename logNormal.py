@@ -104,7 +104,12 @@ def create_logfile(room_name=None):
     return open(filename, 'w')
 
 def read_sensor():
-    reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
+    try:
+        reader = SensorReader("SDS011", "/dev/ttyUSB0", interval=10, samples=1)
+    except Exception as e:
+        logging.info(f"Failed to initialize sensor reader: {e}")
+        return
+
     start_time = time.time()
 
     logging.info("\nSDS011 1 sample on CSV format with header")
